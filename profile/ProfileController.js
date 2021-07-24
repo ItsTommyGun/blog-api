@@ -10,10 +10,11 @@ var ObjectId = require("mongoose").Types.ObjectId;
 
 // Returns profile of currently logged in user
 router.get("/", VerifyToken, (req, res) => {
-  Profile.findOne({ linkedUser: req.userId }, function (err, profile) {
-    if (err)
-      return res.status(500).send("There was a problem finding the profile.");
+  Profile.findOne({ linkedUser: req.userId }).then((profile) => {
     res.status(200).send({ name: profile.name, surname: profile.surname, city: profile.city });
+  }).catch((err) => {
+    if (err)
+      return res.status(500).send("There was a problem finding the profile: " + err);
   });
 });
 

@@ -23,15 +23,14 @@ router.post("/", VerifyToken, function (req, res) {
 
 router.get("/", function (req, res) {
   Entry.find()
-    .lean()
-    .exec()
     .then((response) => {
       return res.status(200).send(response);
     })
     .catch((err) => {
+        console.log(err);
       return res
         .status(500)
-        .send({ message: "there was an error fetching the entries " + err });
+        .send({ message: "There was an error fetching the entries: " + err });
     });
 });
 

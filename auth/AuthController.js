@@ -27,26 +27,32 @@ async function checkUserExistsByMail(req, res, next) {
 }
 
 router.post("/register", checkUserExistsByMail, async function (req, res) {
-
   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-  var role = req.body.role.toUpperCase();
-
+  var role = "USER";
+  if (req.body.role) {
+    role = req.body.role.toUpperCase();
+  }
+  
   const newUser = await User.create({
     email: req.body.email,
     password: hashedPassword,
-    role: role
-  }).then((user) => {
-    return user.toObject();
-  }).catch((err) => {
-    return res
-      .status(500)
-      .send({message: "There was a problem registering the user:", error: err});
-  });
+    role: role,
+  })
+    .then((user) => {
+      return user.toObject();
+    })
+    .catch((err) => {
+      return res
+        .status(500)
+        .send({
+          message: "There was a problem registering the user:",
+          error: err,
+        });
+    });
 
   Profile.create({ linkedUser: newUser._id }, function (err, profile) {
     if (err)
       return res.status(500).send("There was a problem creating the profile.");
-
   });
 
   res.status(200).send({ message: "Worked!" });
