@@ -5,7 +5,7 @@ var db = require('./db');
 
 
 app.use(function (req, res, next) {
-  const allowedOrigins = ['http://localhost:5000', 'http://localhost:3000'];
+  const allowedOrigins = ['http://localhost:5000', 'http://localhost:3000', 'https://tommycodes-blog.herokuapp.com'];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
        res.setHeader('Access-Control-Allow-Origin', origin);
