@@ -41,6 +41,10 @@ app.get('/userManagement', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 var UserController = require('./user/UserController');
 app.use('/api/users', UserController);
 
