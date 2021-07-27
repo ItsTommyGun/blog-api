@@ -2,16 +2,13 @@
 
 Blog project for training purposes.
 
-## info
+## Stack
 
 Built with
 - ExpressJS
 - JWT Auth
 - React
 
-## Installation
+## Dependencies
 
-Install all necessary modules
-
-``` npm install ```
-
+Front end implementation in public folder is built and generated at https://github.com/ItsTommyGun/blog-client
